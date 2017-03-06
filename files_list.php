@@ -27,17 +27,39 @@ Tips:
 Note:
 This excercise was kind of tricky. Seems so obvious at first sight.
 
+>>
 Timeline:
 - general idea 2mins. then.. re-think general idea and got the catch:)
 - so, working prototype with bugs: around 2 hrs.
 - redesign after re-think and testing on different browsers: rest of the day :)
 
+>>
 -tested on 
           desktop: opera, chrome, firefox
           mobile: chrome  
 
 seems to work perfectly  
 
+>>
+As you mentioned - 'CSS is powerfull'.
+I am aware of CSS features  like
+text-overflow:clip
+or
+text-overflow:ellipsis
+which could be used as rough and ready solution
+
+eg.
+
+ some.container{ 
+   white-space: nowrap; 
+   width: 300px;
+   overflow: hidden;
+   text-overflow: clip; 
+   or
+   text-overflow: ellipsis;
+  } 
+
+but..
 */
 
 $files = array(
@@ -158,23 +180,19 @@ $files = array(
 
 <div id="wrap">
   <div id="parentcontainer">
-
+  
   <?php 
   $filesLen = count($files);
-  for($i=0; $i<$filesLen; $i++){
-    $fileArr = $files[$i];
+  for($i=0; $i<$filesLen;$i++){
     
-    foreach($fileArr as $key=>$value){
-      if($key=='name'){
-        $nameFull = $value;
-        //$ext = substr(strrchr($name, '.'), 1);//no .dot
-        $ext = strrchr($nameFull, '.');//with dot
-        $cutPos = strrpos($nameFull, $ext);
-        $name = substr($nameFull,0,$cutPos);
-      }else if($key=='size'){  
-        $size = $value;
-      }
-    }//end foreach
+    $file = $files[$i];
+    
+    $size = $file['size'];
+    $nameFull = $file['name'];
+    //$ext = substr(strrchr($name, '.'), 1);//no .dot
+    $ext = strrchr($nameFull, '.');//with dot
+    $cutPos = strrpos($nameFull, $ext);
+    $name = substr($nameFull,0,$cutPos);
   ?>  
   
   <div class="item">
